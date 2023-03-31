@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
-const useHttp = (requestConfig, applyData) => {
+const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const sendRequest = async () => {
+  const sendRequest = useCallback(async (requestConfig, applyData) => {
     setIsLoading(true);
     setError(null);
     // "https://react-http-3d9ed-default-rtdb.asia-southeast1.firebasedatabase.app/tasks.json"
@@ -21,24 +21,16 @@ const useHttp = (requestConfig, applyData) => {
 
       const data = await response.json();
       applyData(data);
-
-      // const loadedTasks = [];
-
-      // for (const taskKey in data) {
-      //   loadedTasks.push({ id: taskKey, text: data[taskKey].text });
-      // }
-
-      // setTasks(loadedTasks);
     } catch (err) {
       setError(err.message || "Something went wrong!");
     }
     setIsLoading(false);
-  };
+  }, []);
 
   return {
-    isLoading, // === isLoading: isLoading,
-    error, // === error: error,
-    sendRequest, // === sendRequest: sendRequest,
+    isLoading,
+    error,
+    sendRequest,
   };
 };
 
