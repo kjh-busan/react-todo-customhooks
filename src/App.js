@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react';
 
 import Tasks from './components/Tasks/Tasks';
 import NewTask from './components/NewTask/NewTask';
+import useHttp from "./hooks/use-http";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const requestInfo = {
+    url: "https://react-http-3d9ed-default-rtdb.asia-southeast1.firebasedatabase.app/tasks.json",
+  };
+  useHttp();
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [error, setError] = useState(null);
   const [tasks, setTasks] = useState([]);
 
   // const fetchTasks = async (taskText) => {

@@ -10,9 +10,9 @@ const useHttp = (requestConfig, applyData) => {
     // "https://react-http-3d9ed-default-rtdb.asia-southeast1.firebasedatabase.app/tasks.json"
     try {
       const response = await fetch(requestConfig.url, {
-        method: requestConfig.method,
-        headers: requestConfig.headers,
-        body: JSON.stringify(requestConfig.body),
+        method: requestConfig.method ? requestConfig.method : "GET",
+        headers: requestConfig.headers ? requestConfig.headers : {},
+        body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
       });
 
       if (!response.ok) {
