@@ -20,15 +20,15 @@ const useHttp = (requestConfig, applyData) => {
       }
 
       const data = await response.json();
+      applyData(data);
 
-      const loadedTasks = [];
+      // const loadedTasks = [];
 
-      for (const taskKey in data) {
-        loadedTasks.push({ id: taskKey, text: data[taskKey].text });
-      }
+      // for (const taskKey in data) {
+      //   loadedTasks.push({ id: taskKey, text: data[taskKey].text });
+      // }
 
       // setTasks(loadedTasks);
-      applyData(data);
     } catch (err) {
       setError(err.message || "Something went wrong!");
     }
